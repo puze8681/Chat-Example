@@ -1,4 +1,4 @@
-package com.example.parktaejun.chattingexample;
+package com.example.parktaejun.chattingexample.Datas;
 
 /**
  * Created by parktaejun on 2017. 2. 10..
