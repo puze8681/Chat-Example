@@ -1,7 +1,6 @@
-package com.example.parktaejun.chattingexample;
+package com.example.parktaejun.chattingexample.Adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,19 +8,20 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.parktaejun.chattingexample.Datas.User;
+import com.example.parktaejun.chattingexample.R;
 
 import java.util.List;
 
 /**
- * Created by parktaejun on 2017. 2. 10..
+ * Created by parktaejun on 2017. 2. 11..
  */
 
-public class FriendListAdapter extends BaseAdapter {
+public class ChattingListAdapter extends BaseAdapter{
 
     private Context context;
     private List<User> items;
 
-    public FriendListAdapter(Context context, List<User> items){
+    public ChattingListAdapter(Context context, List<User> items){
         this.context = context;
         this.items = items;
     }
@@ -46,16 +46,10 @@ public class FriendListAdapter extends BaseAdapter {
 
         View view = null;
         if(position == 0){
-            view = LayoutInflater.from(context).inflate(R.layout.search, null);
-        }else if(position == 1 || position == 3){
-            view = LayoutInflater.from(context).inflate(R.layout.text, null);
-            TextView text = (TextView)view.findViewById(R.id.text_text);
-
-            String _text = position == 1 ? "내 프로필" : "친구";
-            text.setText(_text);
+            view = LayoutInflater.from(context).inflate(R.layout.search_chat, null);
         }else {
-            view = LayoutInflater.from(context).inflate(R.layout.item_profileview, null);
-            TextView name = (TextView) view.findViewById(R.id.profile_text);
+            view = LayoutInflater.from(context).inflate(R.layout.item_chattingview, null);
+            TextView name = (TextView) view.findViewById(R.id.chatting_text);
             name.setText(items.get(position).getName());
         }
 
