@@ -1,14 +1,18 @@
 package com.example.parktaejun.chattingexample.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.parktaejun.chattingexample.Adapter.FriendListAdapter;
+import com.example.parktaejun.chattingexample.ChatActivity;
+import com.example.parktaejun.chattingexample.ProfileActivity;
 import com.example.parktaejun.chattingexample.R;
 import com.example.parktaejun.chattingexample.Datas.User;
 
@@ -66,6 +70,18 @@ public class FriendFragment extends Fragment {
 
         listAdapter = new FriendListAdapter(getContext(), items);
         friend_list.setAdapter(listAdapter);
+
+        friend_list.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+                        Intent chatIntent = new Intent(getActivity(), ProfileActivity.class);
+                        chatIntent.putExtra("chatName", items.get(i).getName());
+                        startActivity(chatIntent);
+                    }
+                }
+        );
+
 
         return view;
     }

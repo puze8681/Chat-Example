@@ -22,9 +22,9 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout)findViewById(R.id.tablayout);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
 
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.mipmap.click_person).setTag("person"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.click_friend).setTag("person"));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.unclick_chat).setTag("chat"));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.mipmap.unclick_option).setTag("option"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.unclick_option).setTag("option"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         setSupportActionBar(toolbar);
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (tabLayout.getSelectedTabPosition()){
                     case 0:
                         getSupportActionBar().setTitle("친구");
-                        tab.setIcon(R.mipmap.click_person);
+                        tab.setIcon(R.drawable.click_friend);
                         break;
                     case 1:
                         getSupportActionBar().setTitle("채팅");
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 2:
                         getSupportActionBar().setTitle("설정");
-                        tab.setIcon(R.mipmap.click_option);
+                        tab.setIcon(R.drawable.click_option);
                         break;
                 }
             }
@@ -60,13 +60,13 @@ public class MainActivity extends AppCompatActivity {
             public void onTabUnselected(TabLayout.Tab tab) {
                 switch (tabLayout.getSelectedTabPosition()){
                     case 0:
-                        tab.setIcon(R.mipmap.unclick_person);
+                        tab.setIcon(R.drawable.unclick_friend);
                         break;
                     case 1:
                         tab.setIcon(R.drawable.unclick_chat);
                         break;
                     case 2:
-                        tab.setIcon(R.mipmap.unclick_option);
+                        tab.setIcon(R.drawable.unclick_option);
                         break;
                 }
             }
