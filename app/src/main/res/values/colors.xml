@@ -5,5 +5,7 @@
     <color name="colorAccent">#ffff00</color>
     <color name="white">#fff</color>
     <color name="gray">#b0b0b0</color>
-
+    <color name="chat">#B0C6D3</color>
+    <color name="chatToolBar">#A7C3D3</color>
+    <color name="black">#000000</color>
 </resources>
