@@ -3,6 +3,7 @@ package com.example.parktaejun.chattingexample.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,10 +46,10 @@ public class FriendFragment extends Fragment {
         friend_edit = (EditText) view.findViewById(R.id.friend_edit);
         friend_list = (ListView) view.findViewById(R.id.friend_list);
 
+        items.add(new User("search"));
+        items.add(new User("myProfile"));
         items.add(new User("박태준"));
-        items.add(new User("윤영채"));
-        items.add(new User("박태준"));
-        items.add(new User("윤영채"));
+        items.add(new User("myFriend"));
         items.add(new User("박태준"));
         items.add(new User("윤영채"));
         items.add(new User("박태준"));
@@ -75,9 +76,13 @@ public class FriendFragment extends Fragment {
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                        Intent chatIntent = new Intent(getActivity(), ProfileActivity.class);
-                        chatIntent.putExtra("chatName", items.get(i).getName());
-                        startActivity(chatIntent);
+                        String positionCheck = items.get(i).getName();
+                        Log.d("asdf", String.valueOf(i)+ " : " + positionCheck);
+                        if(!(positionCheck.equals("search") || positionCheck.equals("myProfile") || positionCheck.equals("myFriend"))){
+                            Intent profileIntent = new Intent(getActivity(), ProfileActivity.class);
+                            profileIntent.putExtra("chatName", items.get(i).getName());
+                            startActivity(profileIntent);
+                        }
                     }
                 }
         );
