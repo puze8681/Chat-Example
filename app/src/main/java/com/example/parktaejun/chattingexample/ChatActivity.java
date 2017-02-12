@@ -11,20 +11,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.parktaejun.chattingexample.Adapter.ChattingListAdapter;
 import com.example.parktaejun.chattingexample.Datas.User;
+import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.Socket;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -65,7 +69,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        chattingList = (ListView)findViewById(R.id.chat_list);
+        chattingList = (ListView)findViewById(R.id.chatting_list);
         chattingList.setFooterDividersEnabled(false);
         chattingList.setHeaderDividersEnabled(false);
         chattingList.setDividerHeight(0);
@@ -73,6 +77,37 @@ public class ChatActivity extends AppCompatActivity {
         chattingList.setAdapter(chat_adapter);
 
         mSocket.connect();
+        findViewById(R.id.sendButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText edit = (EditText)findViewById(R.id.chatting_text);
+                String msg = edit.getText().toString();
+                mSocket.emit("chat message", msg);
+                JSONObject json = new JSONObject();
+                try{
+                    json.put("who", "me");
+                    json.put("msg", msg);
+                    addChat(json);
+                } catch(JSONException e){
+                    e.printStackTrace();
+                }
+                edit.setText("");
+            }
+        });
+        mSocket.on("send message", new Emitter.Listener(){
+            @Override
+            public void call(Object... args) {
+                JSONObject data = (JSONObject) args[0];
+                JSONObject json = new JSONObject();
+                try{
+                    json.put("who", "other");
+                    json.put("msg", data.getString("msg"));
+                    addChat(json);
+                } catch(JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 

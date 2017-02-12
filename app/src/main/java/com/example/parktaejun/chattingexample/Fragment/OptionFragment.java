@@ -13,8 +13,8 @@ import com.example.parktaejun.chattingexample.R;
  */
 
 public class OptionFragment extends Fragment {
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle sabedInstanceState){
-        return inflater.inflate(R.layout.fragment_option, container, false);
+        View view = inflater.inflate(R.layout.fragment_option, container, false);
+        return view;
     }
 }

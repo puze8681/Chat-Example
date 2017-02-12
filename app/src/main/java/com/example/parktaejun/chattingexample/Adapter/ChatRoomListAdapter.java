@@ -26,24 +26,24 @@ import java.util.List;
  * Created by parktaejun on 2017. 2. 11..
  */
 
-public class ChattingListAdapter extends BaseAdapter{
+public class ChatRoomListAdapter extends BaseAdapter{
 
     private Context context;
-    private List<JSONObject> jsonItems;
+    private List<User> items;
 
-    public ChattingListAdapter(Context context, List<JSONObject> jsonItems){
+    public ChatRoomListAdapter(Context context, List<User> items){
         this.context = context;
-        this.jsonItems = jsonItems;
+        this.items = items;
     }
 
     @Override
     public int getCount() {
-        return jsonItems.size();
+        return items.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return jsonItems.get(position);
+        return items.get(position);
     }
 
     @Override
@@ -51,31 +51,19 @@ public class ChattingListAdapter extends BaseAdapter{
         return 0;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        JSONObject jsonItem = jsonItems.get(position);
-        Drawable background = null;
-        String msg = "";
-
         View view = LayoutInflater.from(context).inflate(R.layout.chat, null);
         LinearLayout container = (LinearLayout) view.findViewById(R.id.container);
-        TextView chat_card = (TextView) view.findViewById(R.id.chat_box);
 
-        try{
-            if(jsonItem.getString("who").equals("me")){
-                container.setGravity(Gravity.RIGHT);
-                background = container.getResources().getDrawable(R.drawable.chat_box_me, context.getTheme());
-            } else {
-                background = container.getResources().getDrawable(R.drawable.chat_box_other, context.getTheme());
-            }
-            msg = jsonItem.getString("msg");
-        } catch (JSONException e){
-            e.printStackTrace();
+        if(position == 0){
+            view = LayoutInflater.from(context).inflate(R.layout.search_chat, null);
+        }else {
+            view = LayoutInflater.from(context).inflate(R.layout.item_chattingview, null);
+            TextView name = (TextView) view.findViewById(R.id.chatting_text);
+            name.setText(items.get(position).getName());
         }
-        chat_card.setBackground(background);
-        chat_card.setText(msg);
 
         return view;
     }

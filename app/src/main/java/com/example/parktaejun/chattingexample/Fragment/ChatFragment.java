@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.parktaejun.chattingexample.Adapter.ChatRoomListAdapter;
 import com.example.parktaejun.chattingexample.Adapter.ChattingListAdapter;
 import com.example.parktaejun.chattingexample.ChatActivity;
 import com.example.parktaejun.chattingexample.R;
@@ -26,7 +27,7 @@ public class ChatFragment extends Fragment {
 
     private EditText chat_edit;
     private ListView chat_list;
-    private ChattingListAdapter listAdapter;
+    private ChatRoomListAdapter listAdapter;
     private List<User> items = new ArrayList<>();
 
     public ChatFragment(){
@@ -67,16 +68,16 @@ public class ChatFragment extends Fragment {
         items.add(new User("박태준"));
         items.add(new User("윤영채"));
 
-        listAdapter = new ChattingListAdapter(getContext(), items);
+        listAdapter = new ChatRoomListAdapter(getContext(), items);
         chat_list.setAdapter(listAdapter);
 
         chat_list.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                        String name = String.valueOf(parent.getItemAtPosition(i).toString());
+                        String name = items.get(i).getName();
                         Intent chatIntent = new Intent(getActivity(), ChatActivity.class);
-                        chatIntent.putExtra("chatName", items.get(i).getName());
+                        chatIntent.putExtra("chatName", name);
                         startActivity(chatIntent);
                     }
                 }
