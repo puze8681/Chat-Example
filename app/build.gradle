@@ -17,6 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
+}
+repositories {
+    mavenCentral()
 }
 
 dependencies {
@@ -31,4 +36,6 @@ dependencies {
     compile 'com.github.Kennyc1012:BottomSheet:2.3.1'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.+'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
