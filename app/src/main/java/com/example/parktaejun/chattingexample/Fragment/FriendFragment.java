@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.example.parktaejun.chattingexample.Adapter.FriendListAdapter;
 import com.example.parktaejun.chattingexample.ChatActivity;
+import com.example.parktaejun.chattingexample.LoginActivity;
 import com.example.parktaejun.chattingexample.ProfileActivity;
 import com.example.parktaejun.chattingexample.R;
 import com.example.parktaejun.chattingexample.Datas.User;
@@ -48,7 +49,7 @@ public class FriendFragment extends Fragment {
 
         items.add(new User("search"));
         items.add(new User("myProfile"));
-        items.add(new User("박태준"));
+        items.add(new User(LoginActivity.userName));
         items.add(new User("myFriend"));
         items.add(new User("박태준"));
         items.add(new User("윤영채"));
