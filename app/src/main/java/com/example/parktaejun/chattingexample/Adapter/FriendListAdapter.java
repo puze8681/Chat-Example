@@ -69,7 +69,7 @@ public class FriendListAdapter extends BaseAdapter {
             Picasso.with(context)
                     .load(url)
                     .into(profileImage);
-            profileText.setText(LoginActivity.userName);
+            profileText.setText(LoginActivity.pref.getString("userName", ""));
         }else {
             view = LayoutInflater.from(context).inflate(R.layout.item_profileview, null);
             TextView name = (TextView) view.findViewById(R.id.profile_text);

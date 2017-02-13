@@ -43,13 +43,15 @@ import retrofit2.Response;
  */
 
 public class LoginActivity extends AppCompatActivity {
+    public static SharedPreferences pref;
+    public static SharedPreferences.Editor editor;
     private AlertDialog dialog;
     public static String userID;
     public static String userToken;
     public static String userName;
     public static Boolean loginCheck = false;
 
-    Button loginbtn;
+    private Button loginbtn;
 
     private CallbackManager callbackManager;
     @Override
@@ -58,7 +60,9 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(this, SplashActivity.class));
         setContentView(R.layout.activity_login);
 
-        final SharedPreferences pref = getSharedPreferences("pref", 0);
+        pref = getSharedPreferences("pref", 0);
+        editor = pref.edit(); //값을 입력, 삭제하기 위해 사용
+
         pref.getBoolean("loginCheck", loginCheck);
         pref.getString("userID", "");
         pref.getString("userPW", "");
@@ -118,6 +122,9 @@ public class LoginActivity extends AppCompatActivity {
                                 // Application code
                                 try {
                                     userName = object.getString("name");
+                                    editor.putString("userName", userName);
+                                    editor.commit();      //값을 저장할때 호출
+
                                     Log.d("TAG", userName);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -134,7 +141,6 @@ public class LoginActivity extends AppCompatActivity {
                 mainIntent.putExtra("userToken", userToken);
                 mainIntent.putExtra("userName", userName);
 
-                SharedPreferences.Editor editor = pref.edit();   //값을 입력, 삭제하기 위해 사용
                 editor.putBoolean("loginCheck", loginCheck);
                 editor.putString("userID", userID);
                 editor.putString("userPW", userToken);
